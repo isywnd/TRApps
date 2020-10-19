@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<style>
+		html,body,h1,h2,h3,h4,h5,h6 {
+  		font-family: "Berlin Sans FB", cursive, sans-serif;
+		}
+	</style>
+	<style>
+      .img-container {
+        text-align: center;
+      }
+    </style>
+	<title>Assessment File</title>
+</head>
+
+<body>
+	<div class="img-container">
+		<img src="\media\images\logorpl.png" alt="upi" width="300" height="110" >
+
+	</div>
+	<div class="w3-container">
+		<h1 style="text-align:center;">Essay Assessment Prodi RPL</h1>
+   		<h2 style="text-align:center;">UPI Kampus di Cibiru</h2>
+	</div>
+	<br>
+	<br>
+	<form method = "post" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit">Upload Image</button>
+	</form>
+</body>
+</html>

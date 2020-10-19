@@ -1,0 +1,61 @@
+html,body,h1,h2,h3,h4,h5,h6 {
+    /* font-family: "Berlin Sans FB", cursive, sans-serif; */
+}
+
+.img-container {
+    text-align: center;
+}
+
+.carousel {
+    height: 600px;
+}
+
+.carousel-inner img {
+    height: 600px;
+    width:100%;
+}
+
+.z-index-20 {
+    z-index: 20;
+}
+.text-white {
+    color: #fff!important;
+}
+
+.py-6 {
+    padding-top: 6rem!important;
+    padding-bottom: 6rem!important;
+}
+
+.pb-md-7, .py-md-7 {
+    padding-top: 8rem!important;
+    padding-bottom: 8rem!important;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 2px rgba(0,0,0,.1);
+}
+
+.text-secondary {
+    color: #693054 !important;
+}
+.font-weight-bold {
+    font-weight: 700!important;
+}
+.display-3, .display-4 {
+    font-weight: 400;
+    line-height: 1.3;
+}
+.display-3 {
+    font-size: 4.5rem;
+}
+
+.carousel-info {
+    margin-top: -510px;
+}
+
+.carousel-info .btn {
+    background-color: #3399CC;
+    color: #dcefe6;
+}
+

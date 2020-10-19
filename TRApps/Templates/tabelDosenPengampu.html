@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<title>Homepage</title>
+	<style>
+		html,body,h1,h2,h3,h4,h5,h6 {
+  		font-family: "Berlin Sans FB", cursive, sans-serif;
+		}
+	</style>
+	<style>
+      .img-container {
+        text-align: center;
+      }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/popper.js' %}"></script>
+	<script src="{% static 'js/bootstrap.js' %}"></script>
+
+    <a class="navbar-brand" href="/">TRApps</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/testlist/">Assessment</a>
+        </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Student List
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/studentlist/">Insert Student</a>
+            <a class="dropdown-item" href="/viewjadwal/">View Test Score</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Lecture List
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/dosenlist/">Insert Lecture</a>
+            <a class="dropdown-item" href="/mklist/">Insert Course</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/classlist/">Tutorial Insert Class</a>
+          </div>
+        </li>
+
+      </ul>
+	</div>
+    </nav>
+	<div class="img-container">
+		<img src="\media\images\logorpl.png" alt="upi" width="300" height="110" >
+
+	</div>
+	<div class="container">
+		<h1 style="text-align:center;">Essay Assessment Prodi RPL</h1>
+   		<h2 style="text-align:center;">UPI Kampus di Cibiru</h2>
+	</div>
+	<br>
+	<br>
+    <form method="POST" enctype="multipart/form-data">
+        <!-- Security token -->
+    {% csrf_token %}
+
+    <!-- Using the formset -->
+    {{ form.as_p }}
+
+    <input type="submit" value="Submit">
+    </form>
+
+	<br>
+<div class="main">
+  <h2 style="text-align:center;">Daftar Kelas</h2>
+</div>
+
+    <div class="container">
+
+  <table class="table">
+      <thead class="thead-dark">
+    <tr>
+      <th>No.</th>
+      <th>Tahun Ajaran</th>
+      <th>Mata Kuliah</th>
+      <th>Dosen Pengampu</th>
+    </tr>
+      </thead>
+
+    {% for data in dataset %}
+    <tr>
+        <td>{{ data.id }}</td>
+        <td>{{ data.tahunAjaran }}</td>
+        <td>{{ data.mata_kuliah }}</td>
+        <td>{{ data.dosen_Pengampu }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+
+
+</body>
+</html>
