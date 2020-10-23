@@ -12,49 +12,31 @@
                     {% csrf_token %}
                     <div class="mb-4">
                         {% crispy form %}
+                        <br>
+                        {% for kunci in kunci_jawaban %}
+                        <div class="form-group">
+                            <input type="file" name="jawaban-{{ kunci.id }}">
+                        </div>
+                        {% endfor %}
                     </div>
                     <input class="btn btn-primary" type="submit" value="Submit">
                 </form>
             </div>
-            <div class="col-lg-6">
-                <table class="table">
-                  <thead class="thead-dark">
-                <tr>
-                  <th>No.</th>
-                  <th>1</th>
-                  <th>2</th>
-                  <th>3</th>
-                  <th>4</th>
-                  <th>5</th>
-                  <th>6</th>
-                  <th>7</th>
-                  <th>8</th>
-                  <th>Total Score</th>
-                </tr>
-                  </thead>
-                  <tr>
-                  <td>File</td>
-                  <td>upload</td>
-                  <td>upload</td>
-                  <td>upload</td>
-                  <td>upload</td>
-                  <td>upload</td>
-                  <td>upload</td>
-                  <td>upload</td>
-                  <td>upload</td>
-                  <td rowspan="2">100</td>
-                </tr>
-                <tr>
-                    <td>Score</td>
-                    <td>score 1</td>
-                    <td>score 2</td>
-                    <td>score 3</td>
-                    <td>score 4</td>
-                    <td>score 5</td>
-                    <td>score 6</td>
-                    <td>score 7</td>
-                    <td>score 8</td>
-                </tr>
+            <div class="p-xl-5 col-lg-6">
+                <h3>Nama Mahasiswa: <strong>{{ mahasiswa.nama }}</strong></h3>
+                <hr class="my-4"/>
+                <ul>
+                    {% for kunci in kunci_jawaban %}
+                    <li>
+                        <div>jawaban: {{ kunci.jawaban }}</div>
+                        <div>poin: {{ kunci.point }}</div>
+                        <div>score: {{ kunci.score|default:"" }}</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div>
+                    <h4>Total Score: <strong>{{ mahasiswa.nama }}</strong></h4>
+                </div>
                 {% for data in dataset %}
 
                 {% endfor %}

@@ -136,12 +136,13 @@ def assessmentStudent(request, id):
 
 	context = {}
 	if request.method == 'POST':
+		context['mahasiswa'] = Mahasiswa.objects.get(pk=request.POST['mahasiswa'])
 		form = ScoreStudentForm(request.POST)
 		if form.is_valid():
 			form.save()
 	else:
 		form = ScoreStudentForm(initial={'tanggalUjian': test_instance.id, 'dosen_pengampu': test_instance.mata_kuliah})
-
+	context['kunci_jawaban'] = KunciJawaban.objects.filter(tanggalUjian=test_instance.id)
 	context['form'] = form
 	context['test_instance'] = test_instance
 	return render(request, "startAssessmentStudent.html", context)
