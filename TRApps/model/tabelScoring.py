@@ -1,9 +1,10 @@
 from django.db import models
 from.tabelDosenPengampu import DosenPengampu
 from.tabelMahasiswa import Mahasiswa
+from.tabelTest import Test
 
 class Scoring (models.Model):
-    tanggalUjian = models.DateField()
+    tanggalUjian = models.ForeignKey(Test, on_delete=models.CASCADE)
     mahasiswa = models.ForeignKey(Mahasiswa, on_delete=models.CASCADE)
     dosen_pengampu = models.ForeignKey(DosenPengampu, on_delete=models.CASCADE)
     hasilScore = models.IntegerField()

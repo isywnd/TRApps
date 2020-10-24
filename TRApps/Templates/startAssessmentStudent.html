@@ -18,24 +18,24 @@
                             <input type="file" name="jawaban-{{ kunci.id }}">
                         </div>
                         {% endfor %}
+                        <input class="btn btn-primary" type="submit" value="Submit">
                     </div>
-                    <input class="btn btn-primary" type="submit" value="Submit">
                 </form>
             </div>
             <div class="p-xl-5 col-lg-6">
-                <h3>Nama Mahasiswa: <strong>{{ mahasiswa.nama }}</strong></h3>
+                <h3>Nama Mahasiswa: <strong>{{ mahasiswa.nama_mahasiswa }}</strong></h3>
                 <hr class="my-4"/>
                 <ul>
                     {% for kunci in kunci_jawaban %}
                     <li>
                         <div>jawaban: {{ kunci.jawaban }}</div>
                         <div>poin: {{ kunci.point }}</div>
-                        <div>score: {{ kunci.score|default:"" }}</div>
+                        <div>score: {{ kunci.score }}</div>
                     </li>
                     {% endfor %}
                 </ul>
                 <div>
-                    <h4>Total Score: <strong>{{ mahasiswa.nama }}</strong></h4>
+                    <h4>Total Score: <strong>{{ total_score }}</strong></h4>
                 </div>
                 {% for data in dataset %}
 

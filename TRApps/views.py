@@ -19,6 +19,7 @@ from .forms.kunciJawabanForm import kunciJawabanForm
 from .model.tabelKunciJawaban import KunciJawaban
 from .model.tabelScoring import Scoring
 from .forms.studentScoreForm import ScoreStudentForm
+from .SimpleTR.main import main
 
 # Defining a function which
 # will receive request and
@@ -135,14 +136,36 @@ def assessmentStudent(request, id):
 		test_instance = Test.objects.get(pk=id)
 
 	context = {}
+	kunci_jawaban = KunciJawaban.objects.filter(tanggalUjian=test_instance)
 	if request.method == 'POST':
 		context['mahasiswa'] = Mahasiswa.objects.get(pk=request.POST['mahasiswa'])
+		total_score = 0
+		for kunci in kunci_jawaban:
+			score = 0
+			try:
+				file_jawaban_mhs = request.FILES['jawaban-'+str(kunci.id)]
+
+				assesment = Assessment()
+				assesment.file = file_jawaban_mhs
+				jawaban = main(assesment.file)['recognized']
+				if jawaban == kunci.jawaban:
+					score = int(kunci.point)
+				assesment.score = score
+				assesment.save()
+
+				kunci.score = score
+				total_score += score
+			except:
+				kunci.score = 0
+		context['total_score'] = total_score
 		form = ScoreStudentForm(request.POST)
-		if form.is_valid():
-			form.save()
+	if form.is_valid():
+		scoring = form.save(commit=False)
+		scoring.hasilScore = total_score
+		scoring.save()
 	else:
-		form = ScoreStudentForm(initial={'tanggalUjian': test_instance.id, 'dosen_pengampu': test_instance.mata_kuliah})
-	context['kunci_jawaban'] = KunciJawaban.objects.filter(tanggalUjian=test_instance.id)
+		form = ScoreStudentForm(initial={'tanggalUjian': test_instance, 'dosen_pengampu': test_instance.mata_kuliah})
+	context['kunci_jawaban'] = kunci_jawaban
 	context['form'] = form
 	context['test_instance'] = test_instance
 	return render(request, "startAssessmentStudent.html", context)
