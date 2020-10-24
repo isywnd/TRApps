@@ -35,6 +35,7 @@ urlpatterns = [
     path('viewstudent/', viewStudent, name = 'student'),
     path('viewjadwal/<id>/studentscore/', createStudentScore, name = 'scoreMahasiswa'),
     path('viewjadwal/<id>/startAssessment/', assessmentStudent, name = 'startassessment'),
+    path('student/<id>/delete', deleteStudent, name='student.delete')
 ]
 
 if settings.DEBUG:

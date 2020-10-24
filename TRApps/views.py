@@ -142,27 +142,25 @@ def assessmentStudent(request, id):
 		total_score = 0
 		for kunci in kunci_jawaban:
 			score = 0
-			try:
-				file_jawaban_mhs = request.FILES['jawaban-'+str(kunci.id)]
+			file_jawaban_mhs = request.FILES['jawaban-'+str(kunci.id)]
 
-				assesment = Assessment()
-				assesment.file = file_jawaban_mhs
-				jawaban = main(assesment.file)['recognized']
-				if jawaban == kunci.jawaban:
-					score = int(kunci.point)
-				assesment.score = score
-				assesment.save()
+			assesment = Assessment()
+			assesment.file = file_jawaban_mhs
+			assesment.save()
+			jawaban = main(assesment.file.path)
+			if jawaban['recognized'].lower() == kunci.jawaban.lower():
+				score = int(kunci.point)
+			assesment.score = score
+			assesment.save()
 
-				kunci.score = score
-				total_score += score
-			except:
-				kunci.score = 0
+			kunci.score = score
+			total_score += score
 		context['total_score'] = total_score
 		form = ScoreStudentForm(request.POST)
-	if form.is_valid():
-		scoring = form.save(commit=False)
-		scoring.hasilScore = total_score
-		scoring.save()
+		if form.is_valid():
+			scoring = form.save(commit=False)
+			scoring.hasilScore = total_score
+			scoring.save()
 	else:
 		form = ScoreStudentForm(initial={'tanggalUjian': test_instance, 'dosen_pengampu': test_instance.mata_kuliah})
 	context['kunci_jawaban'] = kunci_jawaban
@@ -194,8 +192,16 @@ def displayAssessment(request):
 		return render((request, 'displayimage.html',
 					   {'images': Assessment}))
 
+
 def StudentList(request):
 	context = {
 		"data ": "Gfg"
 	}
 	return render(request, 'addStudent.html', context)
+
+
+def deleteStudent(request, id):
+	if id:
+		mhs = Mahasiswa.objects.get(pk=id)
+		mhs.delete()
+		return redirect('studentform')

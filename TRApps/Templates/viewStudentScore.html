@@ -23,8 +23,8 @@
                     {% for data in dataset %}
                     <tr>
                         <td>{{ data.id }}</td>
-                        <td>{{ data.nama_mahasiswa }}</td>
-                        <td>{{ data.score }} </td>
+                        <td>{{ data.mahasiswa.nama_mahasiswa }}</td>
+                        <td>{{ data.hasilScore }} </td>
                     </tr>
                     {% endfor %}
                   </table>
